@@ -1,12 +1,29 @@
-import { Employee } from "../App"
+import { useState } from 'react';
+import { Employee } from '../models/Employee';
 
-export interface TableProps {
+interface TableProps {
     data: Employee[];
 }
 
-export function Table(props: TableProps) {
-    const {data} = props;
-    return (<table>
+export function Table({data}: TableProps) {
+    const [displayData, setDisplayData] = useState<Employee[]>(data);
+
+
+    const handleSearchType = (event: React.KeyboardEvent) => {
+        const input = event.target as HTMLInputElement;
+        const phrase = input.value.toLowerCase();
+        const d = data.filter(item => {
+            return item.firstName.toLowerCase().includes(phrase) || 
+            item.lastName.toLowerCase().includes(phrase) || 
+            item.phoneNumber.toLowerCase().includes(phrase)
+        });
+        setDisplayData(d);
+    }
+    return (
+    <>
+    <div className='mb-3'><input onKeyUp={handleSearchType} 
+    type="search" placeholder="search..." className="form-control"/></div>
+    <table className="table">
         <thead>
           <tr>
             <th>ID</th>
@@ -17,7 +34,7 @@ export function Table(props: TableProps) {
           </tr>
         </thead>
         <tbody>
-          {data.map(item => <tr>
+          {displayData.map(item => <tr>
             <td>{item.id}</td>
             <td>{item.firstName}</td>
             <td>{item.lastName}</td>
@@ -33,5 +50,5 @@ export function Table(props: TableProps) {
           <td>{worker.status}</td>
         </tr>)} */}
         </tbody>
-      </table>)
+      </table></>)
 }
