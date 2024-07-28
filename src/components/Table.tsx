@@ -7,6 +7,8 @@ interface TableProps {
 
 export function Table({data}: TableProps) {
     const [displayData, setDisplayData] = useState<Employee[]>(data);
+    const [sortKey, setSortKey] = useState<null | keyof Employee>(null);
+    const [sortDirection, setSortDirection] = useState<'asc' | 'desc' | null>(null);
 
 
     const handleSearchType = (event: React.KeyboardEvent) => {
@@ -19,6 +21,64 @@ export function Table({data}: TableProps) {
         });
         setDisplayData(d);
     }
+
+    const getSortDirection = (key: keyof Employee): 'asc' | 'desc' | null => {
+        if (key === sortKey) {
+            if (sortDirection === null) {
+                return 'asc';
+            } else if (sortDirection === 'asc') {
+               return 'desc';
+            } else {
+                return null;
+            }
+        }
+
+        return 'asc';
+    }
+
+    const handleSort = (event: React.MouseEvent, key: keyof Employee) => {
+        event.preventDefault();
+
+        const tempSortDirection = getSortDirection(key);
+
+        let sortedData;
+        if (tempSortDirection === 'asc') {
+            sortedData = [...displayData].sort((a, b) => sortAsc(a, b, key));
+        } else if (tempSortDirection === 'desc') {
+            sortedData = [...displayData].sort((a,b) => sortDesc(a, b, key));
+        } else {
+            sortedData = [...data];
+        }
+        
+        
+
+        setDisplayData(sortedData);
+        setSortKey(key);
+        setSortDirection(tempSortDirection);
+    }
+
+    const sortAsc = (a: Employee, b: Employee, key: keyof Employee): number => {
+        if (a[key] > b[key]){
+            return 1;
+        }
+        if (a[key] < b[key]){
+            return -1;
+        }
+        return 0;
+    }
+
+    const sortDesc = (a: Employee, b: Employee, key: keyof Employee): number => {
+        if (a[key] < b[key]){
+            return 1;
+        }
+        if (a[key] > b[key]){
+            return -1;
+        }
+        return 0;
+    }
+
+    
+
     return (
     <>
     <div className='mb-3'><input onKeyUp={handleSearchType} 
@@ -26,11 +86,11 @@ export function Table({data}: TableProps) {
     <table className="table">
         <thead>
           <tr>
-            <th>ID</th>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Salary</th>
-            <th>Status</th>
+            <th className='cursor-pointer' onClick={(event) => {handleSort(event, "id")}}>ID</th>
+            <th className='cursor-pointer' onClick={(event) => {handleSort(event, "firstName")}}>First Name</th>
+            <th className='cursor-pointer' onClick={(event) => {handleSort(event, "lastName")}}>Last Name</th>
+            <th className='cursor-pointer' onClick={(event) => {handleSort(event, "salary")}}>Salary</th>
+            <th className='cursor-pointer' onClick={(event) => {handleSort(event, "status")}}>Status</th>
           </tr>
         </thead>
         <tbody>
