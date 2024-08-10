@@ -1,8 +1,14 @@
 export interface Employee {
   id: string;
-  firstName: string;
-  lastName: string;
+  firstname: string;
+  lastname: string;
   salary: number;
-  status: string;
-  phoneNumber: string;
+  status: EmployeeStatus;
+  phonenumber: number | null;
+  address: string;
+  city: string;
+  postalcode: string;
+  birthdate: Date | null;
 }
+
+export type EmployeeStatus = 'HIRED' | 'FIRED' | 'ON_LEAVE';

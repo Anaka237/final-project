@@ -1,0 +1,52 @@
+{
+  "employees": [
+    {
+      "id": "1",
+      "firstname": "John",
+      "lastname": "Doe",
+      "salary": 5000,
+      "dateOfBirth": "1990-12-03",
+      "address": "34 Complicated Street",
+      "city": "New York",
+      "zipcode": "123-23",
+      "status": "HIRED",
+      "phonenumber": "111-111-111"
+    },
+    {
+      "id": "2",
+      "firstname": "Jannet",
+      "lastname": "Boom",
+      "salary": 4500,
+      "dateOfBirth": "1987-10-02",
+      "address": "245 Local Street",
+      "city": "Milano",
+      "zipcode": "224-78",
+      "status": "HIRED",
+      "phonenumber": "222-222-222"
+    },
+    {
+      "id": "3",
+      "firstname": "Anthon",
+      "lastname": "Mock",
+      "phonenumber": "333-333-333",
+      "birthdate": "1997-12-23T00:00:00.000Z",
+      "salary": 8000,
+      "status": "HIRED",
+      "address": "456 Glade Street",
+      "city": "Bahama",
+      "postalcode": "12345"
+    },
+    {
+      "id": "8317",
+      "firstname": "Jan",
+      "lastname": "Kowalski",
+      "birthdate": "2000-02-12",
+      "phoneNumber": "111-111-345",
+      "address": "Żywicza 23",
+      "city": "Kraków",
+      "zipCode": "23456",
+      "salary": "2800",
+      "status": "HIRED"
+    }
+  ]
+}
