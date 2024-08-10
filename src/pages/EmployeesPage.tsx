@@ -26,7 +26,7 @@ export function EmployeesPage() {
         <>
             <div className="d-flex justify-content-between align-items-center">
                 <h1 className='pt-4 pb-4'>{t('employees')}</h1>
-                <button onClick={handleAddClick} className="btn btn-primary">{t('add')}</button>
+                <button onClick={handleAddClick} className="btn btn-success">{t('add')}</button>
             </div>
 
             { data.length > 0 ? <Table data={data}></Table> : ''}  
